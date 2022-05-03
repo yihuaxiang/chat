@@ -15,8 +15,10 @@ var ChatRoomClient = function() {
   this.users = [];
   this.nameChanged = false;
   this.totalCount = 0;
-  // this.socket = io.connect('http://123.56.230.53:29231/');
-  this.socket = io.connect();
+  // this.socket = io.connect('https://socket.z.wiki/');
+  this.socket = io.connect({
+    transports: ['polling']
+  });
   this.startup();
   this.init();
 };
