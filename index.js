@@ -16,6 +16,7 @@ var whiteList = [
   '127.0.0.1',
   'localhost',
   'z.wiki',
+  'socket.z.wiki',
 ];
 
 var ChatRoom = function() {
