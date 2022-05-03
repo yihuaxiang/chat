@@ -4,7 +4,8 @@
   "description": "node js chat",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start index.js -f -i 1"
   },
   "repository": {
     "type": "git",
