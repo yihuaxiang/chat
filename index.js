@@ -119,7 +119,7 @@ ChatRoom.prototype.bindEvent = function() {
           self.onlineUser[userId].disconnect();
           delete self.onlineUser[data.id];
           return socket.emit('pm', {
-            msg: '请正常聊天！',
+            msg: '请正常聊天。',
             type: "DISCONNECT"
           });
         }
