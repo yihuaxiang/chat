@@ -137,7 +137,7 @@ ChatRoom.prototype.bindEvent = function() {
           socket.speakTotalTimes++;
           socket.lastSpeakTime = nowTime;
           return socket.emit('pm', {
-            msg: '发送失败，请注意语速！',
+            msg: '发送失败，请注意语速。',
             id: 'system',
             name: 'system',
             type: "ATTENSION"
