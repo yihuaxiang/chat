@@ -115,7 +115,7 @@ ChatRoom.prototype.bindEvent = function() {
       var socket = self.onlineUser[data.id];
       if(socket) {
         var nowTime = Math.floor(new Date().getTime() / 1000);
-        if(socket.speakTotalTimes > 100) {
+        if(socket.speakTotalTimes > 500) {
           self.onlineUser[userId].disconnect();
           delete self.onlineUser[data.id];
           return socket.emit('pm', {
@@ -133,7 +133,7 @@ ChatRoom.prototype.bindEvent = function() {
             type: "ATTENSION"
           });
         }
-        if(socket.lastSpeakTime && nowTime - socket.lastSpeakTime < 3) {
+        if(socket.lastSpeakTime && nowTime - socket.lastSpeakTime < 1) {
           socket.speakTotalTimes++;
           socket.lastSpeakTime = nowTime;
           return socket.emit('pm', {
