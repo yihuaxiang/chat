@@ -19,7 +19,7 @@ const whiteList = [
     'socket.z.wiki',
 ];
 
-var ChatRoom = function () {
+const ChatRoom = function () {
     this.init();
     this.onlineUser = {};
 };
@@ -242,4 +242,8 @@ ChatRoom.prototype.pong = function (uid) {
     });
 };
 
-new ChatRoom();
+const chatRoom = new ChatRoom();
+
+setInterval(() => {
+    console.info('ChatRoom is', Object.keys(chatRoom.onlineUser));
+}, 1000)
