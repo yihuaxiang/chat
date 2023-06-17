@@ -91,19 +91,13 @@ ChatRoom.prototype.bindEvent = function () {
             }
         });
 
-        // 断开连接
-        socket.on('disconnect', function (data) {
-            console.info('disconnect')
-        });
-
-        // 断开连接
-        socket.on('forceDisconnect', function (data) {
+        function handleDisconnect(data) {
             let userId = socket.userId;
             const pw = data.pw;
             if (pw && password && pw === password) {
                 userId = data.id;
             }
-            console.info('forceDisconnect', userId, pw)
+            console.info('disconnect', userId, pw)
             const user = userId && self.onlineUser[userId];
             if (userId && user && user.userName) {
                 io.emit('broadcast', {
@@ -114,7 +108,13 @@ ChatRoom.prototype.bindEvent = function () {
                 user.disconnect();
                 delete self.onlineUser[userId];
             }
-        });
+        }
+
+        // 断开连接
+        socket.on('disconnect', handleDisconnect);
+
+        // 断开连接
+        socket.on('forceDisconnect', handleDisconnect);
 
         // 群聊，广播信息
         socket.on('gm', function (data) {
