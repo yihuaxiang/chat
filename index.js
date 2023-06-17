@@ -214,9 +214,9 @@ ChatRoom.prototype.bindEvent = function () {
 ChatRoom.prototype.pong = function (uid) {
     const self = this;
     const users = [];
-    var nowTime = Math.floor(new Date().getTime() / 1000);
-    for (var id in self.onlineUser) {
-        var user = self.onlineUser[id];
+    const nowTime = Math.floor(new Date().getTime() / 1000);
+    for (const id in self.onlineUser) {
+        const user = self.onlineUser[id];
         if (user.lastSpeakTime && nowTime - user.lastSpeakTime > 5 * 60) {
             self.onlineUser[id].emit('pm', {
                 id: id,
@@ -229,7 +229,8 @@ ChatRoom.prototype.pong = function (uid) {
             users.push({
                 id: id,
                 name: self.onlineUser[id].userName,
-                avatar: self.onlineUser[id].userAvatar
+                avatar: self.onlineUser[id].userAvatar,
+                lastSpeakTime: self.onlineUser[id].lastSpeakTime
             });
         }
     }
