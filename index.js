@@ -92,6 +92,11 @@ ChatRoom.prototype.bindEvent = function () {
         });
 
         // 断开连接
+        socket.on('disconnect', function (data) {
+            console.info('disconnect')
+        });
+
+        // 断开连接
         socket.on('forceDisconnect', function (data) {
             let userId = socket.userId;
             const pw = data.pw;
