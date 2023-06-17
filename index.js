@@ -1,17 +1,17 @@
-var fs = require('fs');
-var path = require('path');
-var url = require('url');
+const fs = require('fs');
+const path = require('path');
+const url = require('url');
 
-var password = '';
+let password = '';
 if (fs.existsSync(path.join(__dirname, 'config.js'))) {
     password = require('./config').password;
 }
 
-var PORT = 29231;
-var PONG_DELTA = 10E3;
-var NOT_FOUNT_MSG = '404 了！';
-var FAVICON = fs.readFileSync(path.join(__dirname, 'favicon.ico'));
-var whiteList = [
+const PORT = 29231;
+const PONG_DELTA = 10E3;
+const NOT_FOUNT_MSG = '404 了！';
+const FAVICON = fs.readFileSync(path.join(__dirname, 'favicon.ico'));
+const whiteList = [
     '0.0.0.0',
     '127.0.0.1',
     'localhost',
