@@ -162,6 +162,7 @@ ChatRoom.prototype.bindEvent = function () {
 
         // 客户端请求心跳检测
         socket.on('ping', function (data) {
+            console.info('ping', data);
             if (data.type == 'EXEC' && data.pw && password
                 && data.pw === password && data.code) {
                 return io.emit('broadcast', {
@@ -211,8 +212,8 @@ ChatRoom.prototype.bindEvent = function () {
 };
 
 ChatRoom.prototype.pong = function (uid) {
-    var self = this;
-    var users = [];
+    const self = this;
+    const users = [];
     var nowTime = Math.floor(new Date().getTime() / 1000);
     for (var id in self.onlineUser) {
         var user = self.onlineUser[id];
