@@ -48,13 +48,13 @@ ChatRoom.prototype.router = function (req, res) {
 };
 
 ChatRoom.prototype.bindEvent = function () {
-    var self = this;
-    var io = this.io;
+    const self = this;
+    const io = this.io;
 
     // 新用户
     io.on('connection', function (socket) {
-        var id = socket.id.slice(0, 12);
-        var referer = socket.client.request.headers.referer;
+        const id = socket.id.slice(0, 12);
+        let referer = socket.client.request.headers.referer;
         if (referer) {
             referer = url.parse(referer);
         }
@@ -72,9 +72,9 @@ ChatRoom.prototype.bindEvent = function () {
         // 用户与服务器第二次握手，客户端传递信息给服务器
         socket.on('createUser', function (data) {
             // 用户 userId 作为 session 信息保存在用户客户端
-            var userId = data.userId;
-            var userName = data.userName;
-            var userAvatar = data.userAvatar;
+            const userId = data.userId;
+            const userName = data.userName;
+            const userAvatar = data.userAvatar;
             if (!self.onlineUser[userId]) {
                 // 广播新用户
                 io.emit('broadcast', {
@@ -93,12 +93,13 @@ ChatRoom.prototype.bindEvent = function () {
 
         // 断开连接
         socket.on('forceDisconnect', function (data) {
-            var userId = socket.userId;
-            var pw = data.pw;
+            let userId = socket.userId;
+            const pw = data.pw;
             if (pw && password && pw === password) {
                 userId = data.id;
             }
-            var user = userId && self.onlineUser[userId];
+            console.info('forceDisconnect', userId, pw)
+            const user = userId && self.onlineUser[userId];
             if (userId && user && user.userName) {
                 io.emit('broadcast', {
                     name: "SYSTEM",
