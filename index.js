@@ -119,7 +119,7 @@ ChatRoom.prototype.bindEvent = function () {
         // 群聊，广播信息
         socket.on('gm', function (data) {
             var socket = self.onlineUser[data.id];
-            console.log('new message', data.msg);
+            console.log('new gm message', data.msg);
             if (socket) {
                 var nowTime = Math.floor(new Date().getTime() / 1000);
                 if (socket.speakTotalTimes > 500) {
@@ -182,6 +182,7 @@ ChatRoom.prototype.bindEvent = function () {
         // 私聊
         socket.on('pm', function (data) {
             if (data.id.length > 12 || !self.onlineUser[data.id]) {
+                console.log('new pm message', data.msg, 'to ', data.id);
                 self.onlineUser[userId].disconnect();
                 delete self.onlineUser[data.id];
                 return socket.emit('pm', {
