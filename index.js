@@ -119,6 +119,7 @@ ChatRoom.prototype.bindEvent = function () {
         // 群聊，广播信息
         socket.on('gm', function (data) {
             var socket = self.onlineUser[data.id];
+            console.log('new message', data.msg);
             if (socket) {
                 var nowTime = Math.floor(new Date().getTime() / 1000);
                 if (socket.speakTotalTimes > 500) {
